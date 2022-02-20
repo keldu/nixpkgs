@@ -29,7 +29,9 @@ stdenv.mkDerivation rec {
   outputs = ["out" "dev"];
 
   meta = with lib; {
+    homepage = "https://github.com/keldu/forstio
     description = "An asynchronous framework with some additional network features";
     platforms = platforms.unix;
+    maintainers = with maintainers; [keldu];
   };
 }
