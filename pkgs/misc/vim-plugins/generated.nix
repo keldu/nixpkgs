@@ -195,6 +195,30 @@ final: prev:
     meta.homepage = "https://github.com/prabirshrestha/asyncomplete.vim/";
   };
 
+  asyncrun-vim = buildVimPluginFrom2Nix {
+    pname = "asyncrun.vim";
+    version = "2022-02-03";
+    src = fetchFromGitHub {
+      owner = "skywind3000";
+      repo = "asyncrun.vim";
+      rev = "fc6d524b9d81850c15b9b374a1b4a1374e243ec3";
+      sha256 = "/144rx2txz+VnPI8y4w1z9DY5nBEmp64arApRGiHQXU=";
+    };
+    meta.homepage = "https://github.com/skywind3000/asyncrun.vim";
+  };
+
+  asynctasks-vim = buildVimPluginFrom2Nix {
+    pname = "asynctasks.vim";
+    version = "2022-01-12";
+    src = fetchFromGitHub {
+      owner = "skywind3000";
+      repo = "asynctasks.vim";
+      rev = "dfecf57c79ded5ead2911e32caff46d8cede8c5c";
+      sha256 = "cw61N5K6GHwdT011oeFV+jzFw9tk4xahPcTnx5jwqPA=";
+    };
+    meta.homepage = "https://github.com/skywind3000/asynctasks.vim";
+  };
+
   ats-vim = buildVimPluginFrom2Nix {
     pname = "ats-vim";
     version = "2020-09-04";
@@ -733,6 +757,18 @@ final: prev:
       sha256 = "11mhpb2jdc7zq7yiwzkks844b7alrdd08h96r6y7p3cxjv1iy5gz";
     };
     meta.homepage = "https://github.com/hrsh7th/cmp-nvim-lua/";
+  };
+
+  cmp-nvim-ultisnips = buildVimPluginFrom2Nix {
+    pname = "cmp-nvim-ultisnips";
+    version = "2022-01-31";
+    src = fetchFromGitHub {
+      owner = "quangnguyen30192";
+      repo = "cmp-nvim-ultisnips";
+      rev = "0e8f501facdcc5bfdb5664ee185e040464a79625";
+      sha256 = "tQ3xkJ34q5+ioi6lQY7F/ZjGngzmv4FDkpNeU5sRqK0=";
+    };
+    meta.homepage = "https://github.com/quangnguyen30192/cmp-nvim-ultisnips";
   };
 
   cmp-omni = buildVimPluginFrom2Nix {
@@ -5627,6 +5663,18 @@ final: prev:
     meta.homepage = "https://github.com/vim-scripts/ReplaceWithRegister/";
   };
 
+  rest-nvim = buildVimPluginFrom2Nix {
+    pname = "rest.nvim";
+    version = "2022-01-26";
+    src = fetchFromGitHub {
+      owner = "NTBBloodbath";
+      repo = "rest.nvim";
+      rev = "2826f6960fbd9adb1da9ff0d008aa2819d2d06b3";
+      sha256 = "0lb3rcc41rb9yhylmkpsj141yfk1kki1xkd4q2i9y0ld0mlwjjv8";
+    };
+    meta.homepage = "https://github.com/NTBBloodbath/rest.nvim/";
+  };
+
   riv-vim = buildVimPluginFrom2Nix {
     pname = "riv.vim";
     version = "2021-08-09";
@@ -6411,6 +6459,18 @@ final: prev:
     meta.homepage = "https://github.com/tomtom/tcomment_vim/";
   };
 
+  telescope-asynctasks-nvim = buildVimPluginFrom2Nix {
+    pname = "telescope-asynctasks.nvim";
+    version = "2021-10-22";
+    src = fetchFromGitHub {
+      owner = "GustavoKatel";
+      repo = "telescope-asynctasks.nvim";
+      rev = "80bd6570e5423d14ad1e6fd56a199955ac1b895f";
+      sha256 = "Ow7iSmosMs/hGEfnKKorZhS4tKVKal+pkZ52LIFsEu4=";
+    };
+    meta.homepage = "https://github.com/GustavoKatel/telescope-asynctasks.nvim";
+  };
+
   telescope-cheat-nvim = buildVimPluginFrom2Nix {
     pname = "telescope-cheat.nvim";
     version = "2021-12-05";
@@ -6590,6 +6650,18 @@ final: prev:
       sha256 = "0gi31w0rpd14zmnnc883hji7vf8hi1njdprhm9lk3n6pslipgfmv";
     };
     meta.homepage = "https://github.com/nvim-telescope/telescope.nvim/";
+  };
+
+  telescope-ultisnips-nvim = buildVimPluginFrom2Nix {
+    pname = "telescope-ultisnips.nvim";
+    version = "2021-09-27";
+    src = fetchFromGitHub {
+      owner = "fhill2";
+      repo = "telescope-ultisnips.nvim";
+      rev = "f48b6d4f53b31507d3fd514905c6940409e8ada8";
+      sha256 = "h2PfstopgjCMFYVOnzEX7gkkIHCamcJPJux5B+qYYww=";
+    };
+    meta.homepage = "https://github.com/fhill2/telescope-ultisnips.nvim";
   };
 
   tender-vim = buildVimPluginFrom2Nix {
@@ -11672,6 +11744,18 @@ final: prev:
       sha256 = "15gikqmpaf5c6687kgc5ib57pw7gyvxaihdv5549s7p2xkkbcl24";
     };
     meta.homepage = "https://github.com/gcmt/wildfire.vim/";
+  };
+
+  winshift-nvim = buildVimPluginFrom2Nix {
+    pname = "winshift.vim";
+    version = "2021-11-15";
+    src = fetchFromGitHub {
+      owner = "sindrets";
+      repo = "winshift.vim";
+      rev = "aaa04b97640165eb0877bfc04943f4282887470b";
+      sha256 = "g5v/qd1FNg7mMZif7Liga3BAnZV7Mi7hkqnCUEFk52U=";
+    };
+    meta.homepage = "https://github.com/sindrets/winshift.nvim";
   };
 
   wmgraphviz-vim = buildVimPluginFrom2Nix {

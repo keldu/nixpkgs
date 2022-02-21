@@ -169,6 +169,7 @@ FelikZ/ctrlp-py-matcher
 feline-nvim/feline.nvim
 fenetikm/falcon
 fhill2/floating.nvim
+fhill2/telescope-ultisnips.nvim
 fiatjaf/neuron.vim
 filipdutescu/renamer.nvim
 fisadev/vim-isort
@@ -223,6 +224,7 @@ guns/vim-clojure-highlight
 guns/vim-clojure-static
 guns/vim-sexp
 guns/xterm-color-table.vim
+GustavoKatel/telescope-asynctasks.nvim
 gyim/vim-boxdraw
 haringsrob/nvim_context_vt
 hashivim/vim-packer
@@ -563,6 +565,7 @@ norcalli/nvim-colorizer.lua
 norcalli/nvim-terminal.lua
 norcalli/snippets.nvim
 NTBBloodbath/galaxyline.nvim
+NTBBloodbath/rest.nvim
 ntpeters/vim-better-whitespace
 numirias/semshi
 numtostr/comment.nvim
@@ -653,6 +656,7 @@ pwntester/octo.nvim
 python-mode/python-mode
 qnighy/lalrpop.vim
 qpkorr/vim-bufkill
+quangnguyen30192/cmp-nvim-ultisnips
 Quramy/tsuquyomi
 racer-rust/vim-racer
 radenling/vim-dispatch-neovim
@@ -755,10 +759,13 @@ simnalamburt/vim-mundo
 simrat39/rust-tools.nvim
 simrat39/symbols-outline.nvim
 sindrets/diffview.nvim
+sindrets/winshift.nvim
 SirVer/ultisnips
 sjl/gundo.vim
 sjl/splice.vim
 sk1418/last256
+skywind3000/asyncrun.vim
+skywind3000/asynctasks.vim
 slashmili/alchemist.vim
 smiteshp/nvim-gps
 sodapopcan/vim-twiggy

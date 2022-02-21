@@ -2,7 +2,6 @@
 
 use strict;
 use warnings;
-use Array::Compare;
 use Config::IniFiles;
 use File::Path qw(make_path);
 use File::Basename;
@@ -174,13 +173,18 @@ sub parseSystemdIni {
 #
 # If a directory with the same basename ending in .d exists next to the unit file, it will be
 # assumed to contain override files which will be parsed as well and handled properly.
-sub parseUnit {
-    my ($unitPath) = @_;
+sub parse_unit {
+    my ($unit_path) = @_;
 
     # Parse the main unit and all overrides
-    my %unitData;
-    parseSystemdIni(\%unitData, $_) for glob("${unitPath}{,.d/*.conf}");
-    return %unitData;
+    my %unit_data;
+    # Replace \ with \\ so glob() still works with units that have a \ in them
+    # Valid characters in unit names are ASCII letters, digits, ":", "-", "_", ".", and "\"
+    $unit_path =~ s/\\/\\\\/gmsx;
+    foreach (glob "${unit_path}{,.d/*.conf}") {
+        parseSystemdIni(\%unit_data, "$_")
+    }
+    return %unit_data;
 }
 
 # Checks whether a specified boolean in a systemd unit is true
@@ -221,8 +225,12 @@ sub unrecord_unit {
 # - 2 if the units are different and a reload action is required
 sub compare_units {
     my ($old_unit, $new_unit) = @_;
-    my $comp = Array::Compare->new;
     my $ret = 0;
+
+    my $comp_array = sub {
+      my ($a, $b) = @_;
+      return join("\0", @{$a}) eq join("\0", @{$b});
+    };
 
     # Comparison hash for the sections
     my %section_cmp = map { $_ => 1 } keys %{$new_unit};
@@ -255,7 +263,7 @@ sub compare_units {
             }
             my @new_value = @{$new_unit->{$section_name}{$ini_key}};
             # If the contents are different, the units are different
-            if (not $comp->compare(\@old_value, \@new_value)) {
+            if (not $comp_array->(\@old_value, \@new_value)) {
                 # Check if only the reload triggers changed
                 if ($section_name eq 'Unit' and $ini_key eq 'X-Reload-Triggers') {
                     $ret = 2;
@@ -307,7 +315,7 @@ sub handleModifiedUnit {
         # Revert of the attempt: https://github.com/NixOS/nixpkgs/pull/147609
         # More details: https://github.com/NixOS/nixpkgs/issues/74899#issuecomment-981142430
     } else {
-        my %unitInfo = $newUnitInfo ? %{$newUnitInfo} : parseUnit($newUnitFile);
+        my %unitInfo = $newUnitInfo ? %{$newUnitInfo} : parse_unit($newUnitFile);
         if (parseSystemdBool(\%unitInfo, "Service", "X-ReloadIfChanged", 0) and not $unitsToRestart->{$unit} and not $unitsToStop->{$unit}) {
             $unitsToReload->{$unit} = 1;
             recordUnit($reloadListFile, $unit);
@@ -409,12 +417,12 @@ while (my ($unit, $state) = each %{$activePrev}) {
 
     if (-e $prevUnitFile && ($state->{state} eq "active" || $state->{state} eq "activating")) {
         if (! -e $newUnitFile || abs_path($newUnitFile) eq "/dev/null") {
-            my %unitInfo = parseUnit($prevUnitFile);
+            my %unitInfo = parse_unit($prevUnitFile);
             $unitsToStop{$unit} = 1 if parseSystemdBool(\%unitInfo, "Unit", "X-StopOnRemoval", 1);
         }
 
         elsif ($unit =~ /\.target$/) {
-            my %unitInfo = parseUnit($newUnitFile);
+            my %unitInfo = parse_unit($newUnitFile);
 
             # Cause all active target units to be restarted below.
             # This should start most changed units we stop here as
@@ -448,8 +456,8 @@ while (my ($unit, $state) = each %{$activePrev}) {
         }
 
         else {
-            my %old_unit_info = parseUnit($prevUnitFile);
-            my %new_unit_info = parseUnit($newUnitFile);
+            my %old_unit_info = parse_unit($prevUnitFile);
+            my %new_unit_info = parse_unit($newUnitFile);
             my $diff = compare_units(\%old_unit_info, \%new_unit_info);
             if ($diff eq 1) {
                 handleModifiedUnit($unit, $baseName, $newUnitFile, \%new_unit_info, $activePrev, \%unitsToStop, \%unitsToStart, \%unitsToReload, \%unitsToRestart, \%unitsToSkip);
