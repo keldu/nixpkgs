@@ -5476,6 +5476,8 @@ with pkgs;
 
   forktty = callPackage ../os-specific/linux/forktty {};
 
+  forstio = callPackage ../development/libraries/forstio {};
+
   fortune = callPackage ../tools/misc/fortune { };
 
   fox = callPackage ../development/libraries/fox {
