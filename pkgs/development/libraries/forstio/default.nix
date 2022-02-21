@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
   version = "0.0.0";
 
   buildInputs = [scons clang_12 clang-tools gnutls];
- 
+
   src = fetchFromGitHub {
     repo = "forstio";
     owner = "keldu";
